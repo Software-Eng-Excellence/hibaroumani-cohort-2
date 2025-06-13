@@ -4,5 +4,7 @@ import dotenv from 'dotenv'
 dotenv.config({ path: path.join(__dirname, "..", "..", ".env") })
 
 export default {
-    secret: process.env.secret
+    logDir: process.env.logDir || './logs',
+    isDev: process.env.NODE_ENV === 'development'
+
 }

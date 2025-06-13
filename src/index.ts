@@ -1,3 +1,4 @@
+import logger from "./util/logger";
 import {
     FinanceCalculator,
     ItemValidator,
@@ -34,20 +35,20 @@ const newPrice = 22;
 
 OrderManager.addOrder(newItem, newPrice);
 
-console.log("Orders after adding a new order: ", OrderManager.getOrders());
+logger.info("Orders after adding a new order: %o", OrderManager.getOrders());
 
 // Calculate Total Revenue directly
-console.log("Total Revenue:" + OrderManager.getTotalRevenue());
+logger.info("Total Revenue:" + OrderManager.getTotalRevenue());
 
 // Calculate Average Buy Power directly
-console.log("Average Buy Power:" + OrderManager.getAverageBuyPower().toFixed(2));
+logger.info("Average Buy Power:" + OrderManager.getAverageBuyPower().toFixed(2));
 
 // Fetching an order directly
 const fetchId = 2;
 const fetchedObject = OrderManager.getOrder(fetchId)
-console.log("Order with ID 2: ", fetchedObject);
+logger.info("Order with ID 2: %o", fetchedObject);
 // Attempt to fetch a non-existent order
 const nonExistentId = 10;
 const nonExistentOrder = OrderManager.getOrder(nonExistentId);
 
-console.log("Order with ID 10 (non-existent):" + nonExistentOrder);
+logger.info("Order with ID 10 (non-existent):" + nonExistentOrder);

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint",
+    "lint": "eslint src",
     "clean": "rm -rf build",
     "prebuild": "npm run clean && npm run lint",
     "build": "tsc",
@@ -17,7 +17,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "dotenv": "^16.5.0"
+    "dotenv": "^16.5.0",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",

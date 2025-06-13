@@ -1,4 +1,5 @@
 
+import logger from "./util/logger";
 
 
 export interface Order {
@@ -17,14 +18,28 @@ export class OrderManagement {
         return this.orders;
     }
     addOrder(item: string, price: number) {
-
-        const order: Order = { id: this.orders.length + 1, item, price };
-        this.validator.validate(order);
-        this.orders.push(order);
-
+        try {
+            const order: Order = { id: this.orders.length + 1, item, price };
+            this.validator.validate(order);
+            this.orders.push(order);
+        } catch (error) {
+            // Handle Adding errors NOT VALIDATION
+            if (error instanceof Error) {
+                logger.error(`Error Adding Order: ${error.message}`);
+                throw new Error(`Error Adding Order: ${error.message}`);
+            } else {
+                logger.error(`Error Adding Order: ${String(error)}`);
+                throw new Error(`Error Adding Order: ${String(error)}`);
+            }
+        }
     }
     getOrder(id: number) {
-        return this.getOrders().find((order) => order.id === id);
+        const order = this.getOrders().find((order) => order.id === id);
+        if (!order) {
+            logger.warn(`Order with ID ${id} not found`);
+            return;
+        }
+        return order
     }
 
     getTotalRevenue() {
