@@ -5,6 +5,7 @@
         "strict": true, //strict type definitions
         "types": [
             "node",
+            "jest"
         ], //global import of /node_modules/@types/node libraries
         "baseUrl": "./src", //root directory (.ts)
         "outDir": "build", //folder to save compiled files (.js)
