@@ -1,16 +1,13 @@
-import logger from "./util/logger";
+import { parseJSONFile } from "./parsers/JSONParser";
 import { parseCSVFile } from "./parsers/CSVParser";
-import path from "path";
+import { BookMapper } from "./mappers/Book.mapper";
+import { JSONOrderMapper } from "./mappers/Order.mapper";
+import { parseXMLFile } from "./parsers/XMLParser";
 
-const cakeOrdersFilePath = path.join(
-  __dirname,
-  "../",
-  "src/data/cake orders.csv"
-);
 
-const main = async () => {
-  await parseCSVFile(cakeOrdersFilePath);
-  
-};
+async function main() {
+  const toys=await parseXMLFile('src/data/toy orders.xml')
+  console.log(toys[0])
 
+}
 main();
