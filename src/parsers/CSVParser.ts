@@ -20,21 +20,28 @@
 import fs from "fs";
 import { parse } from "csv-parse";
 
-export async function parseCSVFile(filePath: string) {
-  new Promise((resolve, reject) => {
+export async function parseCSVFile(
+  filePath: string,
+  includeHeaders: boolean = false
+): Promise<string[][]> {
+  return new Promise((resolve, reject) => {
     fs.readFile(filePath, "utf-8", (err, data) => {
       if (err) {
         reject(err);
         throw new Error(`Failed to read CSV File: ${err}`);
       }
-      parse(data, { trim: true, skip_empty_lines: true }, (err, result) => {
-        if (err) {
-          reject(err);
-          throw new Error(`Failed to parse CSV File: ${err}`);
+      parse(
+        data,
+        { trim: true, skip_empty_lines: true, relax_column_count: false },
+        (err, parsedData: string[][]) => {
+          if (err) {
+            reject(err);
+            throw new Error(`Failed to parse CSV File: ${err}`);
+          }
+          if (!includeHeaders) parsedData.shift();
+          resolve(parsedData);
         }
-        console.log(result);
-        resolve(result);
-      });
+      );
     }); //takes time
     //since reading file takes time, we'll wrap it with a promise, but working with another promise doesn't work since by the time the second promise is called, the first might not have finished
   });
