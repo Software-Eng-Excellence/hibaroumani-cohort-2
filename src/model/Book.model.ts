@@ -7,8 +7,6 @@ export class Book implements Item {
   }
   private title: string;
   private author: string;
-  private isbn: string;
-  private publishedYear: number;
   private genre: string;
   private format: string;
   private language: string;
@@ -19,8 +17,6 @@ export class Book implements Item {
   constructor(
     title: string,
     author: string,
-    isbn: string,
-    publishedYear: number,
     genre: string,
     format: string,
     language: string,
@@ -30,8 +26,6 @@ export class Book implements Item {
   ) {
     this.title = title;
     this.author = author;
-    this.isbn = isbn;
-    this.publishedYear = publishedYear;
     this.genre = genre;
     this.format = format;
     this.language = language;
@@ -46,14 +40,6 @@ export class Book implements Item {
 
   getAuthor(): string {
     return this.author;
-  }
-
-  getIsbn(): string {
-    return this.isbn;
-  }
-
-  getPublishedYear(): number {
-    return this.publishedYear; //Make publishedYear a String
   }
 
   getGenre(): string {
